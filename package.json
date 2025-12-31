@@ -1,0 +1,17 @@
+{
+  "name": "express-demo",
+  "version": "1.0.0",
+  "description": "Simple express server",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.7.1",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
