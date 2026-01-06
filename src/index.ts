@@ -1,12 +1,16 @@
-import express from 'express';
+import express, { type Request, type Response } from 'express';
 import os from 'os';
+import cors from 'cors';
 
 const PORT = 3000;
 const app = express();
+app.use(express.json());
+app.use(cors());
 
 function getServerIp() {
   const interfaces = os.networkInterfaces();
   for (const name of Object.keys(interfaces)) {
+    if (!interfaces[name]) continue;
     for (const iface of interfaces[name]) {
       if (iface.family === 'IPv4' && !iface.internal) {
         return iface.address;
@@ -16,7 +20,7 @@ function getServerIp() {
   return '127.0.0.1';
 }
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   const hostname = os.hostname();
   const serverIp = getServerIp();
 
