@@ -1,4 +1,4 @@
-name: build-and-package
+name: Build and Package
 
 on:
   push:
@@ -6,35 +6,35 @@ on:
       - '*'
 
 jobs:
-  build:
+  build-and-package:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: pnpm
-
-      - name: Enable Corepack
-        run: corepack enable
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
-      - name: Build
+      - name: Run Build
         run: pnpm build
 
-      - name: Create release zip
+      - name: Package Build
         run: |
-          TAG_NAME=${GITHUB_REF_NAME}
-          zip -r "${TAG_NAME}.zip" dist package.json pnpm-lock.yaml
+          zip -r build-${{ github.ref_name }}.zip dist package.json pnpm-lock.yaml
 
-      - name: Upload artifact
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-${{ github.ref_name }}
-          path: ${{ github.ref_name }}.zip
+          path: build-${{ github.ref_name }}.zip
