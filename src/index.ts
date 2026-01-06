@@ -1,6 +1,9 @@
 import express, { type Request, type Response } from 'express';
 import os from 'os';
 import cors from 'cors';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const PORT = 3000;
 const app = express();
@@ -28,11 +31,15 @@ app.get('/', (req: Request, res: Response) => {
     <h1>Server Info</h1>
     <p><strong>Hostname:</strong> ${hostname}</p>
     <p><strong>Server IP:</strong> ${serverIp}</p>
+    <p><strong>ENV1:</strong> ${process.env.ENV1}</p>
+    <p><strong>ENV2:</strong> ${process.env.ENV2}</p>
   `);
 });
 
 app.listen(PORT, '0.0.0.0', () => {
   const hostname = os.hostname();
   const serverIp = getServerIp();
+  console.log(process.env.ENV1);
+  console.log(process.env.ENV2);
   console.log(`Running on PORT: ${PORT}, HOSTNAME: ${hostname}, IP: ${serverIp}`);
 });
