@@ -31,17 +31,17 @@ jobs:
 
       - name: Package Build
         run: |
-          zip -r build-${{ github.ref_name }}.zip dist package.json pnpm-lock.yaml
+          zip -r build.zip dist package.json pnpm-lock.yaml
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: build-${{ github.ref_name }}.zip
+          files: build.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-${{ github.ref_name }}
-          path: build-${{ github.ref_name }}.zip
+          name: build
+          path: build.zip
