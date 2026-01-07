@@ -28,7 +28,7 @@ app.get('/', (req: Request, res: Response) => {
   const serverIp = getServerIp();
 
   res.status(200).send(`
-    <h1 style="color: #ff0000ff;">Server Info</h1>
+    <h1 style="color: #ff0000ff; background-color: #f2ff00ff">Server Info</h1>
     <p><strong>Hostname:</strong> ${hostname}</p>
     <p><strong>Server IP:</strong> ${serverIp}</p>
     <p><strong>ENV1:</strong> ${process.env.ENV1}</p>
