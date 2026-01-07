@@ -33,6 +33,7 @@ app.get('/', (req: Request, res: Response) => {
     <p><strong>Server IP:</strong> ${serverIp}</p>
     <p><strong>ENV1:</strong> ${process.env.ENV1}</p>
     <p><strong>ENV2:</strong> ${process.env.ENV2}</p>
+    <p><strong>ENV3:</strong> ${process.env.ENV3}</p>
   `);
 });
 
